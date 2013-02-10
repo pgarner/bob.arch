@@ -1,0 +1,52 @@
+# Maintainer: Phil Garner <pgarner at ieee dot org>
+
+pkgname=bob-git
+pkgver=20130204
+pkgrel=1
+pkgdesc="A framework for signal processing and machine learning"
+arch=('i686' 'x86_64')
+url="http://idiap.github.com/bob/"
+license=('GPL3')
+depends=('python2' 'blitz' 'boost' 'fftw' 'netpbm' 'hdf5'
+         'python2-numpy' 'python2-scipy' 'libsvm' 'libmatio'
+         'python2-matplotlib' 'python2-sphinx' 'python2-nose'
+         'python2-sqlalchemy')
+makedepends=('git' 'cmake' 'doxygen')
+optdepends=()
+provides=('bob')
+conflicts=('bob')
+source=()
+md5sums=()
+
+_gitroot="https://github.com/idiap/bob.git"
+_gitname="bob"
+
+build() {
+  cd ${srcdir}
+
+  msg "Connecting to GIT server..."
+  if [[ -d ${_gitname} ]]
+  then
+    (cd ${_gitname} && git pull origin)
+  else
+    git clone ${_gitroot} ${_gitname}
+  fi
+  msg "GIT checkout done or server timeout"
+
+  msg "Starting make..."
+  rm -rf ${_gitname}-build
+  git clone ${_gitname} ${_gitname}-build
+
+  cd ${srcdir}/${_gitname}-build
+
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DWITH_PYTHON=/usr/bin/python2
+  make
+}
+
+package() {
+  cd ${srcdir}/${_gitname}-build
+  make DESTDIR=${pkgdir} install
+}
