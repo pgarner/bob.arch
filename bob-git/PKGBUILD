@@ -8,7 +8,7 @@ arch=('i686' 'x86_64')
 url="http://idiap.github.com/bob/"
 license=('GPL3')
 depends=('python2' 'blitz' 'boost' 'fftw' 'netpbm' 'hdf5'
-         'python2-numpy' 'python2-scipy' 'libsvm' 'libmatio'
+         'python2-numpy' 'python2-scipy' 'libsvm' 'libmatio' 'vlfeat'
          'python2-matplotlib' 'python2-sphinx' 'python2-nose'
          'python2-sqlalchemy')
 makedepends=('git' 'cmake' 'doxygen')
