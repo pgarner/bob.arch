@@ -18,5 +18,6 @@ Notes
 libsvm https://aur.archlinux.org/packages/libsvm/ was updated by the
 maintainer on request (header file, .so link).
 
-blitz https://aur.archlinux.org/packages/blitz/ has a pending request
-to remove the pkgconfig line.
+blitz https://aur.archlinux.org/packages/blitz/ was updated by the
+maintainer to support pkgconfig and seems to work now, so there's no
+need for the one here.
